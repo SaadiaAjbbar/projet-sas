@@ -109,15 +109,29 @@ void AfficheJouerOrdreNoms(){
         AfficheJoueur(Equipe[i]);
     }
 }
-
-  //la fonction AfficheJoueurs affiche tous les joueurs a laide de fonction afficheJoueur
-  void AfficheJoueurs(){
-    printf("les joueurs:\n ");
-    for(int i=0;i<nbC;i++){
-        AfficheJoueur(Equipe[i]);
-    }
-}
-  
+//fonction RechercheJoueurId retourne lindice de joueur avec id recherche
+  int RechercheJoueurId(int id){
+      for(int i=0;i<nbC;i++){
+          if(Equipe[i].id==id){
+              return i;
+          }
+      }
+      return -1;
+  }
+  //fonction SupprimerJoueurId supprimer le joueur avec id recherche
+  void SupprimerJoueurId(int id){
+      int resultat=RechercheJoueurId(id);
+      if(resultat==-1){
+          printf("pas de joueur avec cette id");
+      }
+      for(int i=0;i<nbC;i++){
+          Equipe[i]=Equipe[i+1];
+      }
+      nbC--;
+      printf("le joueur avec id:%d a ete supprime!\n",id);
+      
+  }
+ 
 //************main*********8
 int main() {
     int choix;
@@ -146,7 +160,8 @@ int main() {
                  AjoutJoueurs(n);
              }
              break;
-             case 2:{
+             case 2://************** case  afficher****
+             {
              //AfficheJoueurs();
              int choixAfichage;
              printf("choisir :\n");
@@ -165,12 +180,18 @@ int main() {
                 printf("le choix doit etre 1,2 ou 3!!");
              }
              break;
-            }//fin case 2 
+            }//***************fin case 2 afficher*********** 
+            
              case 3:printf("choisir depuis le menu!!!");
              break;
              case 4:printf("choisir depuis le menu!!!");
              break;
-             case 5:printf("choisir depuis le menu!!!");
+             case 5:int id;
+               printf("entrer id de joueur a supprime");
+               scanf("%d",&id);
+                getchar();
+                SupprimerJoueurId(id);
+                
              break;
              case 6:printf("choisir depuis le menu!!!");
              break;
