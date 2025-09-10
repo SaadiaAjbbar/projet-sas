@@ -66,6 +66,24 @@ void AjoutJoueurs(int n){
 void AfficheJoueur(Joueur J){
     printf("les joueurs:\n id:%d,nom:%s,prenom:%s,maillot:%d,poste:%s,age:%d,buts:%d \n",J.id,J.nom,J.prenom,J.numeroMaillot,J.poste,J.age,J.buts);
 }
+//la fonction AfficheJouerAge affiche tous les joueurs trie par age a laide de fonction afficheJoueur
+void AfficheJouerAge(){
+    for(int i=0;i<nbC;i++){
+        for(int j=0;j<nbC-i;j++){
+            if(Equipe[j].age>Equipe[j+1].age){
+                int tmp=Equipe[j].age;
+                Equipe[j].age=Equipe[j+1].age;
+                Equipe[j+1].age=tmp;
+            }
+        }
+        
+    }
+    //affichage par age
+    for(int i=0;i<nbC;i++){
+        AfficheJoueur(Equipe[i]);
+    }
+}
+
 //la fonction AfficheJoueurs affiche tous les joueurs a laide de fonction afficheJoueur
 void AfficheJoueurs(){
     for(int i=0;i<nbC;i++){
@@ -94,14 +112,32 @@ int main() {
              printf("entrer le nombre des joueurs que tu veux ajouter: ");
              scanf("%d",&n);
              getchar();
-;             if(n+nbC>100){
+            if(n+nbC>100){
                  printf("l'equipe est plein entrer un nombre inferieur");
              }else{
                  AjoutJoueurs(n);
              }
              break;
-             case 2:AfficheJoueurs();
+             case 2:{
+             //AfficheJoueurs();
+             int choixAfichage;
+             printf("choisir :\n");
+             printf("1:pour afficher les joueurs par postes\n");
+             printf("2:pour afficher les joueurs par ordre alphabitique des noms\n");
+             printf("3:pour afficher les joueurs par ages\n");
+             scanf("%d",&choixAfichage);
+             getchar();
+             if(choixAfichage==1){
+                printf("pas encore je difine cette foncontion");
+             }else if(choixAfichage==2){
+                printf("pas encore je difine cette foncontion");
+             }else if(choixAfichage==3){
+                AfficheJouerAge();
+             }else{
+                printf("le choix doit etre 1,2 ou 3!!");
+             }
              break;
+            }//fin case 2 
              case 3:printf("choisir depuis le menu!!!");
              break;
              case 4:printf("choisir depuis le menu!!!");
@@ -112,6 +148,7 @@ int main() {
              break;
              default :printf("choisir depuis le menu!!!");
              break;
+
              
          }
         
