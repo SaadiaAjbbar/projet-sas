@@ -118,13 +118,23 @@ void AfficheJouerOrdreNoms(){
       }
       return -1;
   }
+  //fonction RetourRechercheJoueurId affiche si joueur avec id recherche existe
+  void RetourRechercheJoueurId(int id){
+      int resultatrechId=RechercheJoueurId(id);
+      if(resultatrechId==-1){
+          printf("pas de joueur avec cette id");
+      }else {
+        AfficheJoueur(Equipe[resultatrechId]);
+    }
+  }
+  
   //fonction SupprimerJoueurId supprimer le joueur avec id recherche
   void SupprimerJoueurId(int id){
       int resultat=RechercheJoueurId(id);
       if(resultat==-1){
           printf("pas de joueur avec cette id");
       }
-      for(int i=0;i<nbC;i++){
+      for(int i=resultat;i<nbC;i++){
           Equipe[i]=Equipe[i+1];
       }
       nbC--;
@@ -160,7 +170,7 @@ int main() {
                  AjoutJoueurs(n);
              }
              break;
-             case 2://************** case  afficher****
+             case 2://************** case2  afficher****
              {
              //AfficheJoueurs();
              int choixAfichage;
@@ -184,7 +194,24 @@ int main() {
             
              case 3:printf("choisir depuis le menu!!!");
              break;
-             case 4:printf("choisir depuis le menu!!!");
+             case 4:int choixId_Nom;
+             printf("tapez: 1 Rechercher un joueur par Identifiant \n 2 Rechercher un joueur par Nom: ");
+             scanf("%d",&choixId_Nom);
+             getchar();
+             while(choixId_Nom!=1 && choixId_Nom!=2){
+                 printf("entrer choix soit 1 ou 2");
+                 scanf("%d",&choixId_Nom);
+                 getchar();
+             }
+             if(choixId_Nom==1){
+                 int id;
+                 printf("entrer lidentifant");
+                 scanf("%d",&id);
+                 getchar();
+                 RetourRechercheJoueurId(id);
+             }else if(choixId_Nom==2){
+                 printf("fonction pas encore declare");
+             }
              break;
              case 5:int id;
                printf("entrer id de joueur a supprime");
