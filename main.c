@@ -64,32 +64,60 @@ void AjoutJoueurs(int n){
 
 //declrer la fonction AfficheJoueur qui affiche un seul joueur
 void AfficheJoueur(Joueur J){
-    printf("les joueurs:\n id:%d,nom:%s,prenom:%s,maillot:%d,poste:%s,age:%d,buts:%d \n",J.id,J.nom,J.prenom,J.numeroMaillot,J.poste,J.age,J.buts);
+    printf("id:%d,nom:%s,prenom:%s,maillot:%d,poste:%s,age:%d,buts:%d \n",J.id,J.nom,J.prenom,J.numeroMaillot,J.poste,J.age,J.buts);
 }
 //la fonction AfficheJouerAge affiche tous les joueurs trie par age a laide de fonction afficheJoueur
 void AfficheJouerAge(){
-    for(int i=0;i<nbC;i++){
-        for(int j=0;j<nbC-i;j++){
+    //trie a bulles
+    for(int i=0;i<nbC-1;i++){
+        for(int j=0;j<nbC-i-1;j++){
+            //comparer les ages de toute les elements dequipe
             if(Equipe[j].age>Equipe[j+1].age){
-                int tmp=Equipe[j].age;
-                Equipe[j].age=Equipe[j+1].age;
-                Equipe[j+1].age=tmp;
+                //changer si superieur les places des elements par indices
+                Joueur tmp=Equipe[j];
+                Equipe[j]=Equipe[j+1];
+                Equipe[j+1]=tmp;
             }
         }
         
     }
-    //affichage par age
+    //boucler sur tous lequipe et affichage par age
     for(int i=0;i<nbC;i++){
         AfficheJoueur(Equipe[i]);
     }
 }
 
-//la fonction AfficheJoueurs affiche tous les joueurs a laide de fonction afficheJoueur
-void AfficheJoueurs(){
+
+//la fonction AfficheJouerOrdreNoms affiche tous les joueurs trie par age a laide de fonction afficheJoueur
+void AfficheJouerOrdreNoms(){
+    //trie a bulles
+    for(int i=0;i<nbC-1;i++){
+        for(int j=0;j<nbC-i-1;j++){
+            //comparer les noms de toute les elements dequipe
+            if(strcmp(Equipe[j].nom,Equipe[j+1].nom)>0){
+                //changer si superieur les places des elements par indices
+                Joueur tmp=Equipe[j];
+                Equipe[j]=Equipe[j+1];
+                Equipe[j+1]=tmp;
+            }
+        }
+        
+    }
+     //boucler sur tous lequipe et affichage par age
+      printf("les joueurs:\n ");
     for(int i=0;i<nbC;i++){
         AfficheJoueur(Equipe[i]);
     }
 }
+
+  //la fonction AfficheJoueurs affiche tous les joueurs a laide de fonction afficheJoueur
+  void AfficheJoueurs(){
+    printf("les joueurs:\n ");
+    for(int i=0;i<nbC;i++){
+        AfficheJoueur(Equipe[i]);
+    }
+}
+  
 //************main*********8
 int main() {
     int choix;
@@ -130,7 +158,7 @@ int main() {
              if(choixAfichage==1){
                 printf("pas encore je difine cette foncontion");
              }else if(choixAfichage==2){
-                printf("pas encore je difine cette foncontion");
+                AfficheJouerOrdreNoms();
              }else if(choixAfichage==3){
                 AfficheJouerAge();
              }else{
