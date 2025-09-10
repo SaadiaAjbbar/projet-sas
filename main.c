@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<string.h>
 //declaration des variables necessaires
 typedef struct{
     int id;
@@ -25,8 +26,24 @@ Joueur SaisirJoueur(){
     printf("entrer le numero de maillot de joueur: ");
     scanf("%d",&J.numeroMaillot);
     getchar();
-    printf("entrer le poste de joueur: ");
-    fgets(J.poste,sizeof(J.poste),stdin);
+    printf("entrer le poste soit:gardien, defenseur, milieu OU attaquant: ");
+        fgets(J.poste,sizeof(J.poste),stdin);
+        //supprimer la \n de fin dans post mnin kandir entrer apres
+        int taillePost = strlen(J.poste);
+         if(taillePost > 0 && J.poste[taillePost-1] == '\n'){
+            J.poste[taillePost-1] = '\0';
+        }
+    while(strcmp(J.poste,"gardien")!=0 && strcmp(J.poste,"defenseur")!=0 && strcmp(J.poste,"milieu")!=0 && strcmp(J.poste,"attaquant")!=0){
+        printf("le poste doit etre :gardien, defenseur, milieu OU attaquant!!!!!");
+        fgets(J.poste,sizeof(J.poste),stdin);
+        //supprimer la \n de fin dans post mnin kandir entrer apres
+        taillePost = strlen(J.poste);
+        if(taillePost > 0 && J.poste[taillePost-1] == '\n'){
+        J.poste[taillePost-1] = '\0';
+        }
+    }
+        
+   
     printf("entrer l'age de joueur: ");
     scanf("%d",&J.age);
     getchar();
