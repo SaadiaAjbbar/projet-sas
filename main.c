@@ -14,7 +14,7 @@ typedef struct
 // declration de tableau des joueur
 Joueur Equipe[100] = {
     {1, "messi", "leo", 5, "gardien", 23, 9},
-    {2, "ronaldo", "cris", 6, "milieu", 23, 9},
+    {2, "messi", "cris", 6, "milieu", 23, 9},
     {3, "bono", "yass", 4, "gardien", 23, 9},
 };
 // initialiser le nombre courant des joueures par 0 au debut et sera incrementer dans l'ajout des joueur
@@ -50,7 +50,7 @@ Joueur SaisirJoueur()
     {
         J.poste[taillePost - 1] = '\0';
     }
-    while (strcmp(J.poste, "gardien") != 0 && strcmp(J.poste, "defenseur") != 0 && strcmp(J.poste, "milieu") != 0 && strcmp(J.poste, "attaquant") != 0)
+    while (stricmp(J.poste, "gardien") != 0 && stricmp(J.poste, "defenseur") != 0 && stricmp(J.poste, "milieu") != 0 && stricmp(J.poste, "attaquant") != 0)
     {
         printf("le poste doit etre :gardien, defenseur, milieu OU attaquant!!!!!");
         fgets(J.poste, sizeof(J.poste), stdin);
@@ -127,7 +127,7 @@ void AfficheJouerOrdreNoms()
         for (int j = 0; j < nbC - i - 1; j++)
         {
             // comparer les noms de toute les elements dequipe
-            if (strcmp(Equipe[j].nom, Equipe[j + 1].nom) > 0)
+            if (stricmp(Equipe[j].nom, Equipe[j + 1].nom) > 0)
             {
                 // changer si superieur les places des elements par indices
                 Joueur tmp = Equipe[j];
@@ -156,7 +156,7 @@ void AfficherJoueurPost()
 
         for (int i = 0; i < nbC; i++)
         {
-            if (strcmp(Equipe[i].poste, postes[j]) == 0)
+            if (stricmp(Equipe[i].poste, postes[j]) == 0)
             {
                 AfficheJoueur(Equipe[i]);
                 exist = 1;
@@ -204,20 +204,17 @@ void RechercheJoueurNom(char nom[])
     int i;
     for (i = 0; i < nbC; i++)
     {
-        if (strcmp(nom, Equipe[i].nom) == 0)
+        if (stricmp(nom, Equipe[i].nom) == 0)
         {
-            existindice = i;
-            break;
+           AfficheJoueur(Equipe[i]);
+           existindice++;
         }
     }
     if (existindice == -1)
     {
         printf("pas de joueur avec ce nom");
     }
-    else
-    {
-        AfficheJoueur(Equipe[i]);
-    }
+    
 }
 
 // fonction ModifierAge() modifier lage de joueur avec id entre
@@ -610,7 +607,6 @@ int main()
             printf("choisir depuis le menu!!!");
             break;
         }
-
     } while (choix != 0);
 
     return 0;
