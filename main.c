@@ -21,8 +21,16 @@ Joueur SaisirJoueur(){
     J.id=nbC+1;//automatique id icrement dans chaque saisie
     printf("entrer le nom de joueur: ");
     fgets(J.nom,sizeof(J.nom),stdin);
+    int tailleNom = strlen(J.nom);
+    if(tailleNom > 0 && J.nom[tailleNom-1] == '\n'){
+       J.nom[tailleNom-1] = '\0';
+    }
     printf("entrer le prenom de joueur: ");
     fgets(J.prenom,sizeof(J.prenom),stdin);
+    int taillePreom = strlen(J.prenom);
+    if(taillePreom > 0 && J.nom[taillePreom-1] == '\n'){
+       J.prenom[taillePreom-1] = '\0';
+    }
     printf("entrer le numero de maillot de joueur: ");
     scanf("%d",&J.numeroMaillot);
     getchar();
@@ -43,9 +51,6 @@ Joueur SaisirJoueur(){
         }
     }
         
-
-
-    
    
     printf("entrer l'age de joueur: ");
     scanf("%d",&J.age);
@@ -112,6 +117,31 @@ void AfficheJouerOrdreNoms(){
         AfficheJoueur(Equipe[i]);
     }
 }
+
+//la fonction AfficherJoueurPost affiche tous les joueurs trie par age a laide de fonction afficheJoueur
+void AfficherJoueurPost(){
+    char postes[4][50] = {"gardien","defenseur","milieu","attaquant"};
+    int exist;
+    for(int j=0; j<4; j++){
+        printf("%s :\n", postes[j]);
+         exist = 0;
+
+        for(int i=0; i<nbC; i++){
+            if(strcmp(Equipe[i].poste, postes[j]) == 0){
+                AfficheJoueur(Equipe[i]);
+                exist = 1;
+            }
+        }
+
+        if(exist==0){
+            printf(" Aucun joueur dans ce poste.\n");
+        }
+
+        printf("\n"); // retour a la ligne apres chaque liste de meme poste  
+ 
+     }
+}
+
 //fonction RechercheJoueurId retourne lindice de joueur avec id recherche
   int RechercheJoueurId(int id){
       for(int i=0;i<nbC;i++){
@@ -130,7 +160,22 @@ void AfficheJouerOrdreNoms(){
         AfficheJoueur(Equipe[resultatrechId]);
     }
   }
-  
+  //fonction RechercheJoueurNom affiche si joueur avec nom recherche existe
+  void RechercheJoueurNom(char nom[]){
+      int existindice=-1;
+      int i;
+      for(i=0;i<nbC;i++){
+          if(strcmp(nom,Equipe[i].nom)==0){
+              existindice=i;
+              break;
+          }
+      }
+      if(existindice==-1){
+          printf("pas de joueur avec ce nom");
+      }else{
+          AfficheJoueur(Equipe[i]);
+      }
+  }
   //fonction SupprimerJoueurId supprimer le joueur avec id recherche
   void SupprimerJoueurId(int id){
       int resultat=RechercheJoueurId(id);
@@ -184,7 +229,8 @@ int main() {
              scanf("%d",&choixAfichage);
              getchar();
              if(choixAfichage==1){
-                printf("pas encore je difine cette foncontion");
+                 AfficherJoueurPost();
+                 
              }else if(choixAfichage==2){
                 AfficheJouerOrdreNoms();
              }else if(choixAfichage==3){
@@ -213,7 +259,15 @@ int main() {
                  getchar();
                  RetourRechercheJoueurId(id);
              }else if(choixId_Nom==2){
-                 printf("fonction pas encore declare");
+                 char nom[50];
+                 printf("entrer le nom de joueur cherche");
+                 fgets(nom,sizeof(nom),stdin);
+                 int taille = strlen(nom);
+                 if(taille>0 && nom[taille-1]=='\n'){
+                    nom[taille-1]='\0';
+                  }
+                 RechercheJoueurNom(nom);
+                 
              }
              break;
              case 5:int id;
