@@ -189,6 +189,50 @@ void AfficherJoueurPost(){
       printf("le joueur avec id:%d a ete supprime!\n",id);
       
   }
+  
+  //*****fonctions de statistiques******
+  
+  //fonction AfficheNbTotalJoueurs affiche le nombre total de joueurs
+  void AfficheNbTotalJoueurs(){
+      printf("le nombre total de joueurs est %d \n",nbC);
+  }
+  
+  //fonction AfficheAgeMoyenJoueurs affiche lage moyen de joueurs
+ int AfficheAgeMoyenJoueurs(){
+     int s=0;
+     int m=0;
+     if(nbC==0){
+         m=0;
+     }else{
+        for(int i=0;i<nbC;i++){
+          s=s+Equipe[i].age;
+        }
+      m=s/nbC;
+      return m;
+     }
+ }
+ // la fonction AfficheMeilleurButeurJoueurs affiche le meilleur buteur
+ void AfficheMeilleurButeurJoueurs(){
+     
+     if (nbC == 0) {
+        printf("pas  joueur dans lequipe \n");
+    }else{
+        int maxbuts=0;
+        for(int i=0;i<nbC;i++){
+         if(maxbuts<Equipe[i].buts){
+             maxbuts=Equipe[i].buts;
+         }
+     }
+     for(int i=0;i<nbC;i++){
+         if(maxbuts==Equipe[i].buts){
+             AfficheJoueur(Equipe[i]);
+         }
+     }
+    }
+     
+     
+ }
+
  
 //************main*********8
 int main() {
@@ -277,8 +321,30 @@ int main() {
                 SupprimerJoueurId(id);
                 
              break;
-             case 6:printf("choisir depuis le menu!!!");
+             //***************choix de statistiques*************
+             
+             case 6:int choix_statistique;
+              printf("1 pour Afficher le nombre total de joueurs\n");
+              printf("2 pour Afficher age moyen des joueurs\n");
+              printf("3 Afficher le meilleur buteur\n");
+              printf("4 Afficher le joueur plus jeune et plus age\n");
+              printf("5 Afficher les joueurs marqué plus de X buts\n");
+              scanf("%d",&choix_statistique);
+              getchar();
+              if(choix_statistique==1){
+                  AfficheNbTotalJoueurs();
+              }else if(choix_statistique==2){
+                  int moyen;
+                  moyen=AfficheAgeMoyenJoueurs();
+                  printf("lage moyen des joueurs est :%d",moyen);
+              }else if(choix_statistique==3){
+                  AfficheMeilleurButeurJoueurs();
+              }else{
+                  printf("svp choisi nombre correspondant a votre choix!!!");
+              }
              break;
+              //***************fin choix de statistiques*************
+             
              default :printf("choisir depuis le menu!!!");
              break;
 
