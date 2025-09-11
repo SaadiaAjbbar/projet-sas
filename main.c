@@ -28,7 +28,7 @@ Joueur SaisirJoueur(){
     printf("entrer le prenom de joueur: ");
     fgets(J.prenom,sizeof(J.prenom),stdin);
     int taillePreom = strlen(J.prenom);
-    if(taillePreom > 0 && J.nom[taillePreom-1] == '\n'){
+    if(taillePreom > 0 && J.prenom[taillePreom-1] == '\n'){
        J.prenom[taillePreom-1] = '\0';
     }
     printf("entrer le numero de maillot de joueur: ");
@@ -64,10 +64,14 @@ Joueur SaisirJoueur(){
 
 //declrer la fonction AjoutJouers()prend n saisi par user
 void AjoutJoueurs(int n){
+    if(n<=0){
+        printf("entrer nombre superieur a 0");
+    }else{
     for(int i=0;i<n;i++){
         Equipe[nbC]=SaisirJoueur();
         nbC++;
     }
+}
 }
 
 //declrer la fonction AfficheJoueur qui affiche un seul joueur
@@ -176,6 +180,26 @@ void AfficherJoueurPost(){
           AfficheJoueur(Equipe[i]);
       }
   }
+  
+  //fonction ModifierAge() modifier lage de joueur avec id entre
+  void ModifierAge(int id){
+      int resultatRech=RechercheJoueurId(id);
+      if(resultatRech== -1){
+          printf("pas de joueur avec id %d",id);
+      }else{
+          int age;
+          printf("entrer le nouveau age de joueur: ");
+          scanf("%d",&age);
+          getchar();
+          printf("les anciennes informations du joueur");
+          AfficheJoueur(Equipe[resultatRech]);
+          Equipe[resultatRech].age=age;
+          AfficheJoueur(Equipe[resultatRech]);
+      }
+      
+  }
+  
+  
   //fonction SupprimerJoueurId supprimer le joueur avec id recherche
   void SupprimerJoueurId(int id){
       int resultat=RechercheJoueurId(id);
@@ -330,10 +354,35 @@ int main() {
                 printf("le choix doit etre 1,2 ou 3!!");
              }
              break;
-            }//***************fin case 2 afficher*********** 
+            }//***************fin case 2 afficher***********
             
-             case 3:printf("choisir depuis le menu!!!");
+            //*************** case 3 modifier***********
+             case 3:
+             int choix_modification;
+             printf("********menu de modification****** \n");
+             printf("1 Modifier age dun joueur. \n");
+             printf("2 Modifier le poste dun joueur..\n");
+             printf("3 Modifier nombre de buts dun joueur\n");
+              scanf("%d",&choix_modification);
+              getchar();
+              if(choix_modification==1){
+                  int id;
+                  printf("entrer lid de joueur a modifie: ");
+                  scanf("%d",&id);
+                  getchar();
+                  ModifierAge(id);
+              }else if(choix_modification==2){
+                  printf("RIEN ");
+              }else if(choix_modification==3){
+                  printf("RIEN ");
+              }else{
+                  printf("svp choisi nombre correspondant a votre choix!!!");
+              }
              break;
+             //************* fin case 3 modifier***********
+             
+             
+             
              case 4:int choixId_Nom;
              printf("tapez: 1 Rechercher un joueur par Identifiant \n 2 Rechercher un joueur par Nom: ");
              scanf("%d",&choixId_Nom);
@@ -368,7 +417,7 @@ int main() {
                 SupprimerJoueurId(id);
                 
              break;
-             //***************choix de statistiques*************
+             //**********case choix de statistiques**********
              
              case 6:int choix_statistique;
               printf("1 pour Afficher le nombre total de joueurs\n");
