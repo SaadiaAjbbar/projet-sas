@@ -265,8 +265,22 @@ void AfficheGrandPetitJoueur(){
         printf("le plus grand joueur est:");
          AfficheJoueur(GrandJ);
     }
-       
- 
+    
+//la fonction AfficheJoueurAvecBut affiche le joueur avec plus de buts entre par utilisateur
+ void AfficheJoueurAvecButs(int nbButs){
+     int exist=0;
+     for(int i=0;i<nbC;i++){
+         if(Equipe[i].buts>nbButs){
+             AfficheJoueur(Equipe[i]);
+             exist++;
+         }
+     }
+     if(exist==0){
+         printf("pas de joueur avec plus des buts que %d",nbButs);
+     }
+     
+     
+ }
 //************main*********8
 int main() {
     int choix;
@@ -374,6 +388,12 @@ int main() {
                   AfficheMeilleurButeurJoueurs();
               }else if(choix_statistique==4){
                   AfficheGrandPetitJoueur();
+              }else if(choix_statistique==5){
+                 int nbButs;
+                 printf("entrer le nombre de buts \n");
+                 scanf("%d",&nbButs);
+                 getchar();
+                 AfficheJoueurAvecButs(nbButs);
               }else{
                   
                   printf("svp choisi nombre correspondant a votre choix!!!");
