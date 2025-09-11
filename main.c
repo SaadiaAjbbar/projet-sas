@@ -191,14 +191,33 @@ void AfficherJoueurPost(){
           printf("entrer le nouveau age de joueur: ");
           scanf("%d",&age);
           getchar();
-          printf("les anciennes informations du joueur");
+          printf("les anciennes informations du joueur sont: ");
           AfficheJoueur(Equipe[resultatRech]);
           Equipe[resultatRech].age=age;
+          printf("les nouveaux informations du joueur sont: ");
           AfficheJoueur(Equipe[resultatRech]);
       }
       
   }
   
+  
+  //fonction ModifierButs() modifier lage de joueur avec id entre
+  void ModifierButs(int id){
+      int resultatRech=RechercheJoueurId(id);
+      if(resultatRech== -1){
+          printf("pas de joueur avec id %d",id);
+      }else{
+          int buts;
+          printf("entrer le nouveau nombre des buts de joueur: ");
+          scanf("%d",&buts);
+          getchar();
+          printf("les anciennes informations du joueur");
+          AfficheJoueur(Equipe[resultatRech]);
+          Equipe[resultatRech].buts=buts;
+           printf("les nouveaux informations du joueur sont: ");
+          AfficheJoueur(Equipe[resultatRech]);
+      }
+  }  
   
   //fonction SupprimerJoueurId supprimer le joueur avec id recherche
   void SupprimerJoueurId(int id){
@@ -374,7 +393,11 @@ int main() {
               }else if(choix_modification==2){
                   printf("RIEN ");
               }else if(choix_modification==3){
-                  printf("RIEN ");
+                  int id;
+                  printf("entrer lid de joueur a modifie: ");
+                  scanf("%d",&id);
+                  getchar();
+                  ModifierButs(id);
               }else{
                   printf("svp choisi nombre correspondant a votre choix!!!");
               }
