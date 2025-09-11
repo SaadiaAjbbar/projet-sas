@@ -211,6 +211,7 @@ void AfficherJoueurPost(){
       return m;
      }
  }
+ 
  // la fonction AfficheMeilleurButeurJoueurs affiche le meilleur buteur
  void AfficheMeilleurButeurJoueurs(){
      
@@ -232,7 +233,39 @@ void AfficherJoueurPost(){
      
      
  }
-
+ 
+ //la fonction AffichePlusGrandJoueur affiche le grand joueur
+Joueur AffichePlusGrandJoueur(){
+        Joueur GrandJ=Equipe[0];
+        for(int i=0;i<nbC;i++){
+            if(GrandJ.age<Equipe[i].age){
+               GrandJ =Equipe[i];
+            }
+        }
+        return GrandJ;
+    }
+    
+//la fonction AffichePlusJeuneJoueur affiche le grand joueur
+Joueur AffichePlusJeuneJoueur(){
+        Joueur JeuneJ=Equipe[0];
+        for(int i=0;i<nbC;i++){
+            if(JeuneJ.age>Equipe[i].age){
+               JeuneJ =Equipe[i];
+            }
+        }
+        return JeuneJ;
+    }
+    
+ //la fonction AfficheGrandPetitJoueur affiche le grand et le jeune joueur
+void AfficheGrandPetitJoueur(){
+    Joueur GrandJ=AffichePlusGrandJoueur();
+    Joueur JeuneJ=AffichePlusJeuneJoueur();
+        printf("le plus jeune joueur est:");
+       AfficheJoueur(JeuneJ);
+        printf("le plus grand joueur est:");
+         AfficheJoueur(GrandJ);
+    }
+       
  
 //************main*********8
 int main() {
@@ -339,7 +372,10 @@ int main() {
                   printf("lage moyen des joueurs est :%d",moyen);
               }else if(choix_statistique==3){
                   AfficheMeilleurButeurJoueurs();
+              }else if(choix_statistique==4){
+                  AfficheGrandPetitJoueur();
               }else{
+                  
                   printf("svp choisi nombre correspondant a votre choix!!!");
               }
              break;
