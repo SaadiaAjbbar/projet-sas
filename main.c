@@ -200,6 +200,31 @@ void AfficherJoueurPost(){
       
   }
   
+   //fonction ModifierAge() modifier lage de joueur avec id entre
+  void ModifierPost(int id){
+      int resultatRech=RechercheJoueurId(id);
+      if(resultatRech== -1){
+          printf("pas de joueur avec id %d",id);
+      }else{
+          char NvPost[50];
+          printf("entrer le nouveau post de joueur: ");
+          fgets(NvPost,sizeof(NvPost),stdin);
+          int taille=strlen(NvPost);
+          if(taille > 0 && NvPost[taille-1] == '\n'){
+               NvPost[taille-1] = '\0';
+           }
+          printf("les anciennes informations du joueur sont: ");
+          AfficheJoueur(Equipe[resultatRech]);
+          strcpy(Equipe[resultatRech].poste,NvPost);
+          printf("les nouveaux informations du joueur sont: ");
+          AfficheJoueur(Equipe[resultatRech]);
+      }
+      
+  }
+  
+  
+  
+  
   
   //fonction ModifierButs() modifier lage de joueur avec id entre
   void ModifierButs(int id){
@@ -391,7 +416,11 @@ int main() {
                   getchar();
                   ModifierAge(id);
               }else if(choix_modification==2){
-                  printf("RIEN ");
+                  int id;
+                  printf("entrer lid de joueur a modifie: ");
+                  scanf("%d",&id);
+                  getchar();
+                  ModifierPost(id);
               }else if(choix_modification==3){
                   int id;
                   printf("entrer lid de joueur a modifie: ");
