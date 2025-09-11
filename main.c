@@ -43,6 +43,7 @@ Joueur SaisirJoueur(){
         }
     }
         
+    
    
     printf("entrer l'age de joueur: ");
     scanf("%d",&J.age);
