@@ -13,13 +13,21 @@ typedef struct
 } Joueur;
 // declration de tableau des joueur
 Joueur Equipe[100] = {
-    {1, "messi", "leo", 5, "gardien", 23, 9},
-    {2, "messi", "cris", 6, "milieu", 23, 9},
-    {3, "bono", "yass", 4, "gardien", 23, 9},
+    {1, "messi", "leo", 5, "gardien", 29, 9},
+    {2, "meski", "cris", 6, "milieu", 28, 3},
+    {3, "bono", "yassin", 4, "gardien", 23, 9},
+    {4, "hari", "loca", 3, "gardien", 24, 8},
+    {5, "fali", "sam", 7, "milieu", 23, 9},
+    {6, "saadli", "saad",1, "gardien", 23, 9},
+    {7, "kazi", "leo", 2, "gardien", 23, 32},
+    {8, "sadik", "cris", 11, "milieu", 23, 9},
+    {9, "bono", "khalid",24, "gardien", 34, 7},
+    {10, "salmi", "yass",12, "gardien", 23, 9},
+
 };
 // initialiser le nombre courant des joueures par 0 au debut et sera incrementer dans l'ajout des joueur
-int nbC = 3;
-int id = 3;
+int nbC = 10;
+int id = 10;
 // fonction saisir un contact return un joueur
 Joueur SaisirJoueur()
 {
@@ -214,7 +222,7 @@ void RechercheJoueurNom(char nom[])
     {
         printf("pas de joueur avec ce nom");
     }
-    
+
 }
 
 // fonction ModifierAge() modifier lage de joueur avec id entre
@@ -611,3 +619,4 @@ int main()
 
     return 0;
 }
+
